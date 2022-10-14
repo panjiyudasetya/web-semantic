@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web_service:
+    build: ./web_service
+    volumes:
+     - .:/web-semantic
+    ports:
+     - 1234:1234
+    stdin_open: true
+    tty: true
