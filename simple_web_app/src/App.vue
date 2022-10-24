@@ -1,14 +1,31 @@
 <template>
-  <UserView />
+  <div v-if="selectedUser === null">
+    <UserView @setSelectedUser="selectedUser = $event" />
+  </div>
+	<div v-else>
+    <UserAddressListView @setSelectedUser="selectedUser = $event"/>
+  </div>
 </template>
 
 <script>
 import UserView from './components/UserView.vue'
+import UserAddressListView from './components/UserAddressListView.vue'
 
 export default {
   name: 'App',
   components: {
-    UserView
+    UserView,
+    UserAddressListView,
+  },
+  data() {
+    return {
+      selectedUser: null
+    }
+  },
+  methods: {
+    setSelectedUser(user) {
+      this.selectedUser = user;
+    },
   }
 }
 </script>

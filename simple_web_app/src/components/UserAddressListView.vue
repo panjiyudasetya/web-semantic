@@ -6,8 +6,7 @@ export default {
   name: 'UserAddressListView',
   data() {
     return {
-      userId: 2,
-      username: 'Panji',
+      user: this.$root.$data?.selectedUser,
       addresses: [],
       loading: false,
     }
@@ -17,11 +16,12 @@ export default {
   },
   methods: {
     loadUserAddressList() {
-      const url = `http://0.0.0.0:1234/rss/users/${this.userId}/addresses/`
+      const userId = this.user?.id
+      const url = `http://0.0.0.0:1234/rss/users/${userId}/addresses/`
       this.loading = true;
 
       axios.get(url).then(response => {
-        console.log(`Parsing RSS addresses belongs to User - ${this.userId}...`)
+        console.log(`Parsing RSS addresses belongs to User - ${userId}...`)
         this.parseRSS(response.data).then(result => {
           this.addresses = result
           this.loading = false;
@@ -61,6 +61,9 @@ export default {
           resolve(to_return);  
         });
       })
+    },
+    returnToUserList() {
+      this.$emit("setSelectedUser", null);
     }
   }
 };
@@ -68,7 +71,7 @@ export default {
 
 <template>
   <div>
-    <h2>{{ username }}'s address list</h2>
+    <h2>{{ user.first_name + ' ' + user.last_name }}'s address list</h2>
     <table>
       <thead>
         <td>ID</td>
@@ -81,6 +84,11 @@ export default {
           <td>{{ address.address }}</td>
         </tr>
       </tbody>
+      <tfoot>
+        <td colspan="2">
+          <a @click="returnToUserList()">Back to user list</a>
+        </td>
+      </tfoot>
     </table>
   </div>
 </template>

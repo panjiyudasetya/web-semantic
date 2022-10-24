@@ -26,6 +26,9 @@ export default {
         console.error(reason)
       });
     },
+    showAddressList(user) {
+      this.$emit("setSelectedUser", user);
+    }
   }
 };
 </script>
@@ -41,6 +44,7 @@ export default {
         <td>Last Name</td>
         <td>Email</td>
         <td>Is Active</td>
+        <td>Address</td>
       </thead>
       <tbody>
         <tr v-if="loading">Load list users...</tr>
@@ -51,6 +55,9 @@ export default {
           <td>{{ user.last_name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.is_active }}</td>
+          <td>
+            <a @click="showAddressList(user)">Show</a>
+          </td>
         </tr>
       </tbody>
     </table>   
@@ -66,5 +73,22 @@ export default {
   }
   td {
     padding: 5px;
+  }
+  /* unvisited link */
+  a {
+    color: #2c3e50;
+    text-decoration: underline;
+  }
+
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+    text-decoration: underline;
+  }
+
+  /* selected link */
+  a:active {
+    color: #2c3e50;
+    text-decoration: underline;
   }
 </style>
