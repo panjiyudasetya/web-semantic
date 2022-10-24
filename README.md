@@ -21,3 +21,9 @@ Please note that _docker-compose_ is also needed to be installed so we're able t
 ```
 $ docker-compose up --build
 ```
+
+### How to stop the Project
+
+```
+$ docker-compose down --remove-orphans
+```

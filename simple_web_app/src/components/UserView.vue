@@ -36,6 +36,7 @@ export default {
 <template>
   <div>
     <h2>Users</h2>
+    <p>JSON retrieved from <b><a href="http://localhost:1234/api/users/">http://localhost:1234/api/users/</a></b> endpoint</p>
     <table>
       <thead>
         <td>ID</td>
@@ -44,7 +45,7 @@ export default {
         <td>Last Name</td>
         <td>Email</td>
         <td>Is Active</td>
-        <td>Address</td>
+        <td>Addresses</td>
       </thead>
       <tbody>
         <tr v-if="loading">Load list users...</tr>

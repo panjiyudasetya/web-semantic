@@ -53,6 +53,7 @@ export default {
 
             to_return.push({
               id: item.id[0],
+              username: item.username[0],
               address: item.address[0]
             });
           }
@@ -71,21 +72,26 @@ export default {
 
 <template>
   <div>
-    <h2>{{ user.first_name + ' ' + user.last_name }}'s address list</h2>
+    <h2>{{ user.first_name }}'s address list</h2>
+    <p>
+      XML retrieved from <b><a :href="'http://localhost:1234/rss/users/' + user.id + '/addresses/'">{{ "http://localhost:1234/rss/users/" + user.id + "/addresses/" }}</a></b> endpoint
+    </p>
     <table>
       <thead>
         <td>ID</td>
+        <td>Username</td>
         <td>Address</td>
       </thead>
       <tbody>
         <tr v-if="loading">Load user's address list...</tr>
         <tr v-for="address in addresses" :key="address.id">
           <td>{{ address.id }}</td>
+          <td>{{ address.username }}</td>
           <td>{{ address.address }}</td>
         </tr>
       </tbody>
       <tfoot>
-        <td colspan="2">
+        <td colspan="3">
           <a @click="returnToUserList()">Back to user list</a>
         </td>
       </tfoot>

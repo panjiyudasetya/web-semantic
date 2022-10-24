@@ -4,11 +4,11 @@ from rest_framework import generics
 from rest_framework_xml.parsers import XMLParser
 
 from user_api.models import Address
+from user_api.renderers import AddressXMLRenderer
 from user_api.serializers import (
     UserSerializer,
     AddressSerializer
 )
-from user_api.renderers import AddressXMLRenderer
 
 
 class UserListView(generics.ListAPIView):
